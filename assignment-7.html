@@ -1,0 +1,241 @@
+<html>
+<title>THREEJS</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+<body>
+
+    <script type="text/javascript" src="three.min.js"></script>
+    <script>
+        var mesh, camera, scene, renderer;
+
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100);
+
+        camera.position.z = 100;
+
+        scene = new THREE.Scene();
+        //creating a cube
+        var geometry = new THREE.BoxGeometry(150, 33, 33);
+        var material = new THREE.MeshBasicMaterial({
+            color: 0x3794cf,
+            shininess: 1000,
+            transparent: true,
+            opacity: 0.3
+        });
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = -25;
+        scene.add(mesh);
+        //webGLAvailable=true;
+        //to add fish!!
+
+        var triangleGeometry = new THREE.Geometry();
+        triangleGeometry.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+        triangleGeometry.vertices.push(new THREE.Vector3(0.0, 3.0, 0.0));
+        triangleGeometry.vertices.push(new THREE.Vector3(5.0, 1.0, 0.0));
+        triangleGeometry.faces.push(new THREE.Face3(0, 1, 2));
+        //              triangleGeometry.position.x=-5;
+
+
+        //color of triangle
+        var triangleMaterial = new THREE.MeshBasicMaterial({
+            color: 'purple',
+            side: THREE.DoubleSide,
+            shininess: 10
+        });
+        var triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
+
+        //creating 2 fish
+        var triangleGeometry1 = new THREE.Geometry();
+        triangleGeometry1.vertices.push(new THREE.Vector3(0.0, 2.0, 0.0));
+        triangleGeometry1.vertices.push(new THREE.Vector3(-2.0, -2.0, 0.0));
+        triangleGeometry1.vertices.push(new THREE.Vector3(2.0, -2.0, 0.0));
+        triangleGeometry1.faces.push(new THREE.Face3(1, 2, 0));
+
+        var triangleMaterial1 = new THREE.MeshBasicMaterial({
+            color: 'red',
+            side: THREE.DoubleSide
+        });
+        var triangleMesh1 = new THREE.Mesh(triangleGeometry1, triangleMaterial1);
+
+        //creating 3rd fish
+        var triangleGeometry2 = new THREE.Geometry();
+        triangleGeometry2.vertices.push(new THREE.Vector3(0.0, 2.0, 0.0));
+        triangleGeometry2.vertices.push(new THREE.Vector3(-2.0, -2.0, 0.0));
+        triangleGeometry2.vertices.push(new THREE.Vector3(2.0, -2.0, 0.0));
+        triangleGeometry2.faces.push(new THREE.Face3(1, 2, 0));
+
+        var triangleMaterial2 = new THREE.MeshBasicMaterial({
+            color: 'orange',
+            side: THREE.DoubleSide
+        });
+        var triangleMesh2 = new THREE.Mesh(triangleGeometry2, triangleMaterial2);
+
+
+        //creating 4th fish
+
+        var triangleGeometry3 = new THREE.Geometry();
+        triangleGeometry3.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+        triangleGeometry3.vertices.push(new THREE.Vector3(0.0, 3.0, 0.0));
+        triangleGeometry3.vertices.push(new THREE.Vector3(5.0, 1.0, 0.0));
+        triangleGeometry3.faces.push(new THREE.Face3(0, 1, 2));
+        //                                triangleGeometry.position.x=-5;
+
+
+        //color of triangle
+        var triangleMaterial3 = new THREE.MeshBasicMaterial({
+            color: 'green',
+            side: THREE.DoubleSide,
+            shininess: 50
+        });
+        var triangleMesh3 = new THREE.Mesh(triangleGeometry3, triangleMaterial3);
+
+
+        //creating 5th fish
+
+        var triangleGeometry4 = new THREE.Geometry();
+        triangleGeometry4.vertices.push(new THREE.Vector3(0.0, 2.0, 0.0));
+        triangleGeometry4.vertices.push(new THREE.Vector3(-2.0, -2.0, 0.0));
+        triangleGeometry4.vertices.push(new THREE.Vector3(2.0, -2.0, 0.0));
+        triangleGeometry4.faces.push(new THREE.Face3(1, 2, 0));
+
+        var triangleMaterial4 = new THREE.MeshBasicMaterial({
+            color: 'white',
+            side: THREE.DoubleSide
+        });
+        var triangleMesh4 = new THREE.Mesh(triangleGeometry4, triangleMaterial4);
+        //              triangleGeometry.position.x=-5;
+
+        //                  // creating sun
+        //                 var geometry7 = new THREE.CircleBufferGeometry( 5, 32 );
+        //                 var material7 = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+        //                 var circle1 = new THREE.Mesh( geometry7, material7 );
+        //                 scene.add(circle1);
+        //                    //end sun
+
+        triangleMesh.position.set(-12, 0.0, 34.0);
+        triangleMesh.position.y = -20;
+        //                       triangleMesh.rotateX=50;
+        //                         triangleMesh1.castShadow=true;
+        scene.add(triangleMesh);
+
+        triangleMesh1.position.set(-30, -30, 0);
+        scene.add(triangleMesh1);
+        //
+        triangleMesh2.position.set(53, -30, 5);
+        //                        triangleMesh2.scale(-1,-2);
+        scene.add(triangleMesh2);
+
+        triangleMesh3.position.set(-10, 0.0, 34.0);
+        //                        triangleMesh3.position.x=-45;
+        triangleMesh3.position.y = -20;
+        scene.add(triangleMesh3);
+
+        triangleMesh4.position.set(-45, -15, 0);
+        scene.add(triangleMesh4);
+
+        //creating a scene
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        //sunlight
+        //     var directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+        //           directionalLight.position = new THREE.Vector3(10, 90, 0);
+        //           directionalLight.name = 'directional';
+        //           scene.add(directionalLight);
+        //            var ambientLight = new THREE.AmbientLight(0x111111);
+        //              scene.add(ambientLight);
+
+        //                    var ambientLight = new THREE.AmbientLight(0x101010, 1.0);
+        //                                    scene.add(ambientLight);
+        //
+        //                                // Directional light has a source and shines in all directions, like the sun.
+        //                                  // This behaviour creates shading effects.
+        //                                     directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+        //                                     directionalLight.position.set(0.0, 0.0, 1.0);
+        //                                     scene.add(directionalLight);
+        //                                     document.addEventListener("keydown", onDocumentKeyDown, false);
+        //                                     function onDocumentKeyDown(event){
+        //                                         var keyCode = event.which;
+        //
+        //
+        //                                          if(keyCode == 70){
+        //                                         switch(textureFilter){
+        //                                                                  case 0:
+        //                                                                      crateTexture.minFilter = THREE.NearestFilter;
+        //                                                                      crateTexture.magFilter = THREE.NearestFilter;
+        //                                                                      textureFilter = 1;
+        //                                                                      break;
+        //                                                                  case 1:
+        //                                                                      crateTexture.minFilter = THREE.LinearFilter;
+        //                                                                      crateTexture.magFilter = THREE.LinearFilter;
+        //                                                                      textureFilter = 2;
+        //                                                                      break;
+        //                                                                  case 2:
+        //                                                                      crateTexture.minFilter = THREE.LinearFilter;
+        //                                                                      crateTexture.magFilter = THREE.LinearMipMapNearestFilter;
+        //                                                                      textureFilter = 0;
+        //                                                                      break;
+        //                                                              };
+        //                                                              crateTexture.needsUpdate = true;
+        //
+        //                                                          // 'L' - Toggle light
+        //                                                          } else if(keyCode == 76){
+        //                                                              // If we would just remove the lights from the scene, or set the lights to
+        //                                                              // invisible, we would get a black cube due to the MeshLambertMaterial (it needs
+        //                                                              // light). So we just switch the material to toggle the light
+        //                                                              if(lightIsOn){
+        //                                                                  boxMesh.material = new THREE.MeshBasicMaterial({
+        //                                                                      map:crateTexture,
+        //                                                                      side:THREE.DoubleSide
+        //                                                                  });
+        //                                                                  lightIsOn = false;
+        //
+        //                                                            } else {
+        //                                                                  if(webGLAvailable){
+        //                                                                      boxMesh.material = new THREE.MeshLambertMaterial({
+        //                                                                          map:crateTexture,
+        //                                                                          side:THREE.DoubleSide
+        //                                                                      });
+        //                                                                  } else {
+        //                                                                      boxMesh.material = new THREE.MeshBasicMaterial({
+        //                                                                          map:crateTexture,
+        //                                                                          side:THREE.DoubleSide
+        //                                                                      });
+        //                                                                  }
+        //                                                                  lightIsOn = true;
+        //                                                              }
+        //                                                              boxMesh.material.needsUpdate = true;
+        //                                                              }
+        //                                                              }
+        animate();
+
+        function animate() {
+            //        directionalLight.position = camera.position;
+            requestAnimationFrame(animate);
+            triangleMesh.rotation.y += 0.1;
+            //            triangleMesh.position.x=5;
+            //            triangleMesh.rotation.x +=0.1;
+            triangleMesh.translateZ(2 * (Math.tan(1)));
+
+            triangleMesh1.rotation.x += 0.1;
+            triangleMesh1.translateY(Math.tan(10));
+
+            triangleMesh2.rotation.x += 0.1;
+            triangleMesh2.translateY(Math.tan(10));
+
+            triangleMesh3.rotation.y += 0.1;
+            //             triangleMesh3.position.x=120;
+            triangleMesh3.translateZ(2 * (Math.tan(10)));
+
+            triangleMesh4.rotation.x += 0.1;
+            triangleMesh4.translateY(2 * (Math.tan(10)));
+
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+
+</html>
